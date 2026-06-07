@@ -1,0 +1,58 @@
+services:
+
+  node1:
+    build: .
+    container_name: node1
+    command: python src/node.py 1
+    ports:
+      - "6001:6001"
+    volumes:
+      - ./keys:/app/keys
+      - ./ledgers:/app/ledgers
+
+  node2:
+    build: .
+    container_name: node2
+    command: python src/node.py 2
+    ports:
+      - "6002:6002"
+    volumes:
+      - ./keys:/app/keys
+      - ./ledgers:/app/ledgers
+
+  node3:
+    build: .
+    container_name: node3
+    command: python src/node.py 3
+    ports:
+      - "6003:6003"
+    volumes:
+      - ./keys:/app/keys
+      - ./ledgers:/app/ledgers
+
+  node4:
+    build: .
+    container_name: node4
+    command: python src/node.py 4
+    ports:
+      - "6004:6004"
+    volumes:
+      - ./keys:/app/keys
+      - ./ledgers:/app/ledgers
+
+  # node5:
+  #   build: .
+  #   container_name: node5
+  #   command: python src/node.py 5
+  #   ports:
+  #     - "6005:6005"
+  #   volumes:
+  #     - ./keys:/app/keys
+  #     - ./ledgers:/app/ledgers
+
+  node5:
+    build: .
+    container_name: node5
+    command: python src/adversary.py 5
+    ports:
+      - "6005:6005"

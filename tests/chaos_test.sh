@@ -1,27 +1,20 @@
 #!/bin/bash
 
-PROXY=${1:-node3}
+PROXY=${1:-node5}
 
-echo "Injecting latency into $PROXY..."
+echo "Disconnecting $PROXY..."
 
-curl -X POST 
-http://localhost:8474/proxies/$PROXY/toxics 
+curl -X POST http://localhost:8474/proxies/$PROXY 
 -H "Content-Type: application/json" 
--d '{
-"name":"latency",
-"type":"latency",
-"stream":"downstream",
-"attributes":{
-"latency":2000
-}
-}'
+-d '{"enabled":false}'
 
-echo "Waiting 15 seconds..."
-sleep 15
+echo "$PROXY isolated for 30 seconds..."
+sleep 30
 
-echo "Removing latency..."
+echo "Reconnecting $PROXY..."
 
-curl -X DELETE 
-http://localhost:8474/proxies/$PROXY/toxics/latency
+curl -X POST http://localhost:8474/proxies/$PROXY 
+-H "Content-Type: application/json" 
+-d '{"enabled":true}'
 
 echo "Done."

@@ -22,7 +22,7 @@ from messages import (
     COMMIT
 )
 
-CONSENSUS_MODE = "PBFT" # "PAXOS" or "PBFT"
+CONSENSUS_MODE = "PAXOS" # "PAXOS" or "PBFT"
 
 class Node:
 
@@ -998,7 +998,15 @@ if __name__ == "__main__":
 
     node_id = int(sys.argv[1])
 
-    port = NODES[node_id][1]
+    REAL_PORTS = {
+        1: 6001,
+        2: 6002,
+        3: 6003,
+        4: 6004,
+        5: 6005
+    }
+
+    port = REAL_PORTS[node_id]
 
     peers = {
         k: v
